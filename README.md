@@ -15,6 +15,6 @@ La propuesta para el proyecto final de curso consiste en desarrollar una aplicac
 
 El cliente registra su nombre y documento de identidad, ingresa a la carta del restaurante para visualizarla.
 
-El mesero ingresa el número de la mesa y visualiza en su vista los items de esta, registra la forma de pago y envia el pedido a cocina.
+El mesero ingresa el nombre e identificación del cliente, asi como el número de la mesa y puede visualizar el menú y agregar los items que el cliente desea.
 
 El administrador agrega, actualiza y/o elimina items de la carta.
