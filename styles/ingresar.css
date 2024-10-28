@@ -1,0 +1,56 @@
+* {
+    color: #26180e; 
+  }
+  @font-face {
+    font-family: 'Garbata-extraBold';
+    src: url('garbata/GarbataTrial-Extrabold.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Garbata-regular';
+    src: url('garbata/GarbataTrial-Regular.ttf') format('truetype');
+  }
+body {
+    background-color: #ffd230;
+    font-family: 'Garbata-extraBold';
+    
+}
+
+.page-container{
+    display: flex; flex-direction: row; justify-content: center; margin-top:80px; gap:12%; border: 1px solid red
+}
+
+.container {
+    border-radius: 20px;
+    float: right;
+    margin-top: 30px;
+    padding-left: 50px;
+    padding-top: 50px;
+    /* margin-right: 200px; */
+    background-color: #ffd230;
+    width: 450px;
+    height: 400px;
+    text-align:left;
+    }
+
+.button-login {
+    position:absolute;
+    background-color: #26180e;
+    padding: 15px;
+    width: 130px;
+    font-family: 'Garbata-regular' ;
+    color:#ffd230;
+  }
+  
+  .login-item{
+    display: flex; flex-direction: row; align-items: center; gap: 10px;
+  }
+  
+  .input{
+    margin-left: 50px; height: 30px; width: 280px;
+  }
+  
+  .login-item-container{
+    height: 130px;
+  }
+  
+  

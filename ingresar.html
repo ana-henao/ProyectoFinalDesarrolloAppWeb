@@ -3,32 +3,53 @@
 <head>
   <title>Ingresa: El balcón andino</title>
   <link rel="icon" type="image/x-icon" href="images\bandera icon.png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/ingresar.css">
     <style>
-        body{
-            background-size: cover;
+      body{
+            background-size:cover;
         }
-        
-    .container {
-        border-radius: 20px;
-        float: right;
-        margin: 100px;
-        margin-right: 200px;
-        background-color: #ffd230;
-        width: 500px;
-        height: 400px;
-        text-align:end;
-        }
-  </style>
+      h1 {
+        color: #26180e;
+        font-size: 50px;
+        text-align: left;
+      }
+    </style>
     
 </head>
 <body background="images\Vistas-desde-el-Peñón-Guatapé-Colombia-by-machbel-2.jpg">
+  <div class="page-container">
+    <div style="display: flex; flex-direction: column;">
+      <div style="margin-top: 70px;">
+        <h1 style="height: 20px;">Ingresa a </h1>
+        <h1 style="color: #ffd230; line-height: 60px;">nuestro <br>Sitio</h1>
+      </div>
+      <div style="margin-top: -60px;">
+        <h4 style="border-radius: 10px;  font-family: Garbata-regular; background-color:#46442b ; padding: 30px; color: white; font-weight: 400; font-size: 18px;">
+          Descubre todo lo que tenemos <br> para ofrecerte. ¡te esperamos!</h4>
+      </div>
+    </div>
     <div class="container">
-    <h1></h1>
+      <form action="nuestro_menu.html" >
+        <div class="login-item-container">
+          <div class='login-item'>
+            <img src="images\one.png"  width="40px" height="40px">
+            <h2>Nombre: </h2>
+          </div>
+          <input class='input' type="text" id="fname" name="fname" value="" ><br>
+        </div>
+        <div class="login-item-container">
+          <div class='login-item'>
+            <img src="images\two.png"  width="40px" height="40px">
+            <h2>N° de documento: </h2>
+          </div>
+          <input  class='input' type="text" id="lname" name="lname" value="" ><br><br>
+        </div> 
+          <div class='login-item'>
+            <img src="images\three.png"  width="40px" height="40px">
+            <input type="submit" value="INGRESAR" class="button-login" style="margin-left: 50px;">
+          </div>
+      </form> 
     </div>
-
-    
-
-    </div>
+  </div>
   </body>
 </html>

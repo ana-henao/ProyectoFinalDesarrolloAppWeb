@@ -1,0 +1,28 @@
+* {
+    color: #26180e; 
+  }
+  @font-face {
+    font-family: 'Garbata-extraBold';
+    src: url('garbata/GarbataTrial-Extrabold.ttf') format('truetype');
+  }
+  @font-face {
+    font-family: 'Garbata-regular';
+    src: url('garbata/GarbataTrial-Regular.ttf') format('truetype');
+  }
+body {
+    background-color: #ffd230;
+    font-family: 'Garbata-extraBold';
+    
+}
+
+.button {
+    position:absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #26180e;
+    padding: 15px 32px;
+    font-family: 'Garbata-regular' ;
+    color:#ffd230;
+    margin-bottom: 50px;
+}
