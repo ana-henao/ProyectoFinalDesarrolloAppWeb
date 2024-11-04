@@ -21,7 +21,6 @@ body {
     justify-content: center; 
     margin-top:80px; 
     gap:5%; 
-    border: 1px solid red
 }
 
 button {
@@ -47,4 +46,10 @@ button {
   padding: 20px;
   width: 50%;
   border-radius: 25px;
+  
+
+  .menu-list{
+    border: 1px solid red;
+    height: 300px;
+  }
 }
