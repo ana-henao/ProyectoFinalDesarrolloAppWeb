@@ -1,0 +1,788 @@
+openapi: "3.0.0"
+info:
+  version: 1.0.0
+  title: Swagger Menu
+  description: A sample API that uses a restaurant menu
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: Swagger API Team
+    email: apiteam@swagger.io
+    url: http://swagger.io
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: http://petstore.swagger.io/api
+paths:
+  /menuitem:
+    get:
+      tags:
+        - Menu Items
+      description: |
+        Returns all menu items 
+      operationId: findMenuItem
+      parameters:
+        - name: type
+          in: query
+          description: type to filter by
+          required: false
+          style: form
+          schema:
+            $ref: "#/components/schemas/MenuItemType"
+        - name: limit
+          in: query
+          description: maximum number of results to return
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Menu Item response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MenuItem'
+              examples:
+                multipleMenuItems:
+                  summary: A list of menu items
+                  value:
+                    - id: 1
+                      name: Empanadas
+                      price: 4000
+                      description: 6 empanadas de iglesia acompañadas de ají dulce/picante.
+                      type: 1
+                    - id: 1
+                      name: Pandebonos
+                      price: 8000
+                      description: 6 Pandebonos pequeños.
+                      type: 1
+                singleMenuItem:
+                  summary: A single Menu Item
+                  value:
+                    - id: 1
+                      name: Pandebonos
+                      price: 8000
+                      description: 6 Pandebonos pequeños.
+                      type: 1
+                emptyList:
+                  summary: An empty list
+                  value: []
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Menu Items
+      description: Creates a new menu item in the menu
+      operationId: addMenuItem
+      requestBody:
+        description: MenuItem to add to the menu
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItem'
+            examples:
+              newMenuItem:
+                summary: A new menu item
+                value:
+                  id: 1
+                  name: Pandebonos
+                  price: 8000
+                  description: 6 Pandebonos pequeños.
+                  type: 1
+      responses:
+        '200':
+          description: menu item response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+              examples:
+                newMenuItem:
+                  summary: Created Menu Item
+                  value:
+                    id: 1
+                    name: Pandebonos
+                    price: 8000
+                    description: 6 Pandebonos pequeños.
+                    type: 1
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /menuitem/{id}:
+    get:
+      tags:
+        - Menu Items
+      description: Returns a menu item based on a single ID
+      operationId: findMenuItemById
+      parameters:
+        - name: id
+          in: path
+          description: ID of menu item to fetch
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: menu item response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+              examples:
+                menuItem:
+                  summary: A Menu Item
+                  value:
+                    id: 1
+                    name: Pandebonos
+                    price: 8000
+                    description: 6 Pandebonos pequeños.
+                    type: 1
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - Menu Items
+      description: Returns a menu item updated
+      operationId: updateMenuItemById
+      requestBody:
+        description: MenuItem to add to the menu
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuItem'
+            examples:
+              newMenuItem:
+                summary: A menu item to update
+                value:
+                  id: 1
+                  name: Pandebonos
+                  price: 8000
+                  description: 6 Pandebonos pequeños.
+                  type: 1
+      parameters:
+        - name: id
+          in: path
+          description: ID of menu item to fetch
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: menu item response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuItem'
+              examples:
+                menuItem:
+                  summary: A Menu Item
+                  value:
+                    id: 1
+                    name: Pandebonos
+                    price: 8000
+                    description: 6 Pandebonos pequeños.
+                    type: 1
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - Menu Items
+      description: deletes a single menu item based on the ID supplied
+      operationId: deleteMenuItem
+      parameters:
+        - name: id
+          in: path
+          description: ID of menu item to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: menu item deleted
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /order:
+    get:
+      tags:
+        - Orders
+      description: |
+        Returns all orders 
+      operationId: findOrders
+      parameters:
+        - name: tableId
+          in: query
+          description: table to filter by
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          description: maximum number of results to return
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Orders response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+              examples:
+                multipleMenuItems:
+                  summary: A list of orders
+                  value:
+                    - id: 1
+                      date: 01/01/2024
+                      total: 100000
+                      tableNumber: 2
+                singleMenuItem:
+                  summary: A single Order
+                  value:
+                    - id: 1
+                      date: 01/01/2024
+                      total: 100000
+                      tableNumber: 2
+                emptyList:
+                  summary: An empty list
+                  value: []
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Orders
+      description: Creates a new order for table
+      operationId: addOrder
+      requestBody:
+        description: Add order to table
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+            examples:
+              newMenuItem:
+                summary: A new Order
+                value:
+                  - id: 1
+                    date: 01/01/2024
+                    total: 100000
+                    tableNumber: 2
+      responses:
+        '200':
+          description: Order response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                newMenuItem:
+                  summary: Created Order
+                  value:
+                    - id: 1
+                      date: 01/01/2024
+                      total: 100000
+                      tableNumber: 2
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /order/{id}:
+    get:
+      tags:
+        - Orders
+      description: Returns a order based on a single ID
+      operationId: findOrderById
+      parameters:
+        - name: id
+          in: path
+          description: ID of order to fetch
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Order response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                menuItem:
+                  summary: A Order
+                  value:
+                    - id: 1
+                      date: 01/01/2024
+                      total: 100000
+                      tableNumber: 2
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - Orders
+      description: Returns a order updated
+      operationId: updateOrderById
+      requestBody:
+        description: Order to add to the menu
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+            examples:
+              newMenuItem:
+                summary: A order  to update
+                value:
+                  - id: 1
+                    date: 01/01/2024
+                    total: 100000
+                    tableNumber: 2
+      parameters:
+        - name: id
+          in: path
+          description: ID of order to fetch
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: menu item response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                menuItem:
+                  summary: A Menu Item
+                  value:
+                    - id: 1
+                      date: 01/01/2024
+                      total: 100000
+                      tableNumber: 2
+    delete:
+      tags:
+        - Orders
+      description: deletes a single order based on the ID supplied
+      operationId: deleteOrder
+      parameters:
+        - name: id
+          in: path
+          description: ID of order to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Order deleted
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /server:
+    get:
+      tags:
+        - Servers
+      description: |
+        Returns all servers 
+      operationId: findServers
+      parameters:
+        - name: tableId
+          in: query
+          description: table to filter by
+          required: false
+          style: form
+          schema:
+            type: integer
+            format: int32
+        - name: limit
+          in: query
+          description: maximum number of results to return
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Servers response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Server'
+              examples:
+                multipleMenuItems:
+                  summary: A list of servers
+                  value:
+                    - id: 1
+                      name: pepito
+                      identificationNumber: 123456789
+                singleMenuItem:
+                  summary: A single Order
+                  value:
+                    - id: 1
+                      name: pepito
+                      identificationNumber: 123456789
+                emptyList:
+                  summary: An empty list
+                  value: []
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Servers
+      description: Creates a new server
+      operationId: addServer
+      requestBody:
+        description: Add server to restaurant
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Server'
+            examples:
+              newMenuItem:
+                summary: A new Server
+                value:
+                  - id: 1
+                    name: pepito
+                    identificationNumber: 123456789
+      responses:
+        '200':
+          description: Server response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+              examples:
+                newMenuItem:
+                  summary: Created Server
+                  value:
+                    - id: 1
+                      name: pepito
+                      identificationNumber: 123456789
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /server/{id}:
+    get:
+      tags:
+        - Servers
+      description: Returns a server based on a id
+      operationId: findServerById
+      parameters:
+        - name: id
+          in: path
+          description: ID of order to fetch
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Server response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+              examples:
+                menuItem:
+                  summary: A Order
+                  value:
+                    - id: 1
+                      name: pepito
+                      identificationNumber: 123456789
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - Servers
+      description: deletes a single server based on the IDNumber supplied
+      operationId: deleteServer
+      parameters:
+        - name: id
+          in: path
+          description: ID of server to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Server deleted
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /server/idnumber/{id}:
+    get:
+      tags:
+        - Servers
+      description: Returns a server based on a id number
+      operationId: findServerByIdNumber
+      parameters:
+        - name: id
+          in: path
+          description: ID Number of server to fetch
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Server response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Server'
+              examples:
+                menuItem:
+                  summary: A Order
+                  value:
+                    - id: 1
+                      name: pepito
+                      identificationNumber: 123456789
+        '204':
+          description: Server dosen't exist
+  /client:
+    post:
+      tags:
+        - Clients
+      description: Creates a new client for table
+      operationId: addClient
+      requestBody:
+        description: Add client to table
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+            examples:
+              newMenuItem:
+                summary: A new Client
+                value:
+                  - id: 1
+                    name: pepito
+                    identificationNumber: 123456789
+      responses:
+        '200':
+          description: Client response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+              examples:
+                newMenuItem:
+                  summary: Created Client
+                  value:
+                    - id: 1
+                      name: pepito
+                      identificationNumber: 123456789
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /client/{id}:
+    get:
+      tags:
+        - Clients
+      description: Returns a client based on a single ID
+      operationId: findClientById
+      parameters:
+        - name: id
+          in: path
+          description: ID of client to fetch
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Client response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'
+              examples:
+                menuItem:
+                  summary: A Order
+                  value:
+                    - id: 1
+                      name: pepito
+                      identificationNumber: 123456789
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - Clients
+      description: deletes a single client based on the ID supplied
+      operationId: deleteClient
+      parameters:
+        - name: id
+          in: path
+          description: ID of order to delete
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '204':
+          description: Client deleted
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    MenuItem:
+      type: object
+      required:
+      - id
+      - name
+      - price
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: integer
+          format: int64
+        type:
+          $ref: "#/components/schemas/MenuItemType"
+          
+    MenuItemType:
+      type: string
+      enum:
+        - Entrada
+        - PlatoFuerte
+        - BebidasPostres
+        
+    Table:
+      type: object
+      required:
+      - id
+      - number
+      properties:
+        id:
+          type: integer
+        number:
+          type: string
+          
+    Order:
+      type: object
+      required:
+      - id
+      - date
+      - total
+      properties:
+        id:
+          type: integer
+        date:
+          type: string
+        total:
+          type: number
+        tableNumber:
+          type: integer
+
+    Server:
+      type: object
+      required:
+      - id
+      - name
+      - identificationNumber
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        identificationNumber:
+          type: string
+          
+    Client:
+      allOf: # Combines the main `Pet` schema with `Cat`-specific properties
+        - $ref: "#/components/schemas/Server"
+      
+          
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
