@@ -12,18 +12,23 @@ class MenuItemRoutes {
       .get(this.controller.getAll)
       .post(
         [
-          body("id").trim().notEmpty(),
-          body("name").trim().notEmpty(),
+          body("nombre").trim().notEmpty(),
           body("description").trim().notEmpty(),
-          body("price").trim().isNumeric().notEmpty(),
-          body("type").trim().notEmpty(),
+          body("precio").trim().isNumeric().notEmpty(),
+          body("tipo").trim().notEmpty(),
         ],
         this.controller.createMenuItem
       );
     this.router
       .route("/:id")
       .get(this.controller.getOne)
-      .put(this.controller.updateMenuItem)
+      .put( [
+          body("nombre").trim().notEmpty(),
+          body("description").trim().notEmpty(),
+          body("precio").trim().isNumeric().notEmpty(),
+          body("tipo").trim().notEmpty(),
+        ],
+        this.controller.updateMenuItem)
       .delete(this.controller.deleteMenuItem);
   }
 }

@@ -5,6 +5,11 @@ import * as swaggerUi from "swagger-ui-express";
 import { setContentType } from "./middlewares/middleware.mjs";
 
 import { MenuItemRoutes } from "./routes/MenuItemRoute.mjs";
+import { MeseroRoutes } from "./routes/MeseroRoute.mjs";
+import { MesaRoutes } from "./routes/MesaRoute.mjs";
+import { ClienteRoutes } from "./routes/ClienteRoute.mjs";
+import {PedidoRoutes} from "./routes/PedidoRoute.mjs";
+import { PedidoMenuItemRoutes } from "./routes/PedidoMenuItem.mjs";
 
 const app = express();
 
@@ -33,8 +38,18 @@ app.use(express.json());
 app.use(setContentType);
 
 const menuItemRoutes = new MenuItemRoutes();
+const meseroRoutes = new MeseroRoutes();
+const mesaRoutes = new MesaRoutes();
+const clienteRoutes = new ClienteRoutes();
+const pedidoRoutes = new PedidoRoutes();
+const pedidoMenuItemRoutes = new PedidoMenuItemRoutes();
 
 app.use("/menuItems", menuItemRoutes.router);
+app.use("/meseros", meseroRoutes.router);
+app.use('/mesas', mesaRoutes.router);
+app.use('/clientes', clienteRoutes.router);
+app.use('/pedidos', pedidoRoutes.router);
+app.use('/pedidos-menuitems', pedidoMenuItemRoutes.router);
 
 app.all("*", (req, res) => {
   res.status(404).send(JSON.stringify({ message: "invalid path" }));

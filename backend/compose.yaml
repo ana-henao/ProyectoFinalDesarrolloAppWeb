@@ -1,0 +1,13 @@
+name: backend
+services:
+  api: 
+    build: menu-api
+    env_file:
+      - ./menu-api/.env
+    ports:
+      - 8081:8080
+  
+  db:
+    build: db
+    env_file:
+      - ./db/.env

@@ -9,36 +9,47 @@ class MenuItemController {
   }
 
   getAll = async (req, res) => {
-    const { type } = req.params;
-    const list = await this.#service.getAll(type);
-    res.send(list);
+    const { type } = req.query;
+    try {
+          const result = await this.#service.getAll(type);
+          res.send(result);
+        } catch (error) {
+            return res
+              .status(500)
+              .send({ code: error.code, message: error.message });
+        }
   };
 
   createMenuItem = async (req, res) => {
-    const validated = validationResult(req);
-    if (!validated.isEmpty()) {
-      console.log("No valid");
-      return res.status(400).send({ errors: validated.array() });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ errors: errors.array() });
     }
-    const { id, name, description, price, type } = req.body;
+    const { nombre, description, precio, tipo } = req.body;
     try {
-      const result = await this.#service.createMenuItem(id, name, description, price, type);
+      const result = await this.#service.createMenuItem(nombre, description, precio, tipo);
       res.status(201).send(result);
     } catch (error) {
       if (error instanceof CustomError)
         return res
           .status(500)
           .send({ code: error.code, message: error.message });
-      throw error;
     }
   };
 
   updateMenuItem = async (req, res) => {
-    const {id, name, description, price, type } = req.body;
-    if (!id || !name || !description || !price || !type) {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).send({ errors: errors.array() });
+    }
+    const { id } = req.params;
+    if (!id) {
       return res.status(400).send({ code: 400, message: "some data missing" });
     }
-    const updated = await this.#service.updateMenuItem(id,name, description, price, type);
+
+    const { nombre, description, precio, tipo } = req.body;
+
+    const updated = await this.#service.updateMenuItem( id, nombre, description, precio, tipo);
     res.status(200).send(updated);
   };
 
@@ -55,7 +66,6 @@ class MenuItemController {
         return res
           .status(500)
           .send({ code: error.code, message: error.message });
-      throw error;
     }
   };
 
@@ -64,8 +74,16 @@ class MenuItemController {
     if (!id) {
       return res.status(400).send({ code: 400, message: "some data missing" });
     }
-    const course = await this.#service.getOne(id);
-    res.send(course);
+    try {
+      const course = await this.#service.getOne(id);
+      res.send(course);
+    } catch (error) {
+      if (error instanceof CustomError)
+        return res
+          .status(204)
+          .send({ code: error.code, message: error.message });
+    }
+   
   };
 
 }
