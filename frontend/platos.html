@@ -4,6 +4,7 @@
     <title>El balcón andino</title>
     <link rel="icon" type="image/x-icon" href="images\dish-icon.png">
     <link rel="stylesheet" href="styles/platos.css">
+    <script type="module" src="./main.js"></script>
     <style>
         h1 {
             color: #26180e;
@@ -23,8 +24,15 @@
             justify-content: start;
         }
 
+        .menu-item{
+           p{
+            text-align: left;
+           }
+        }
+
         .boton-imagen { 
-            width:25px; 
+            width:10px; 
+            margin-left: 25px;
             border: none; 
             background: none; 
             padding: 0; 
@@ -51,35 +59,15 @@
                 <h1 id="entradas">Entradas</h1>
             </div>
             <div class="page-container">
-                <div class="menu-content">
+                <div class="menu-content" id="menu-content">
                     <div style="display: flex; flex-direction: row; gap: 50%; padding-left: 30px;">
                         <h2>Plato</h2>
                         <h2>Precio [COP]</h2>
                     </div>
                     <div style="overflow-y: auto; padding-right: 10px;">
                         <ul class="menu-list" id="menu-item-content">
-                            <li class="menu-item">
-                                <div style="display: flex; flex-direction: row; gap: 5%; height: 35px;">
-                                    <h3>Empanadas</h3>
-                                    <p style="width: 35%;">...............................</p>
-                                    <h3>12000</h3>
-                                    <button class="boton-imagen" type="submit" name="button1">
-                                        <img class="icon" src="./images/square-plus.png" alt="Botón 1" >
-                                    </button>
-                                    <button class="boton-imagen" type="submit" name="button2">
-                                        <img class="icon" src="./images/square-pen.png" alt="Botón 2">
-                                    </button>
-                                    <button class="boton-imagen" type="submit" name="button3">
-                                        <img class="icon" src="./images/trash.png" alt="Botón 3">
-                                    </button>
-                                </div>
-                                <p style="margin-left: -135px;">Seis empanadas de iglesia acompañadas de ají dulce/picante.</p>
-                            </li>  
                         </ul> 
                     </div>
-                    <button class="boton-imagen" type="submit" name="button1" style="align-self: flex-end;">
-                        <img class="icon" src="./images/square-plus.png" alt="Botón 1" >
-                    </button>
                 </div>
                 <img id="menu-img" src="images\pandebonos.jpg" width="280px" height="450px" style="object-fit: cover; border-radius: 25px;" >
             </div>

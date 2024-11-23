@@ -3,7 +3,7 @@ BEGIN;
 -- Insertar meseros
 INSERT INTO Mesero (nombre, identificacion) VALUES
 ('Carlos Pérez', '123456789'),
-('Ana Gómez', '987654321'),
+('Admin', '987654321'),
 ('Luis Martínez', '456789123'),
 ('María Rodríguez', '321654987');
 

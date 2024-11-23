@@ -4,6 +4,7 @@
     <title>El balcón andino</title>
     <link rel="icon" type="image/x-icon" href="images\dish-icon.png">
     <link rel="stylesheet" href="styles/nuestro-menu.css">
+    <script type="module" src="./main.js"></script>
     <style>
         h1 {
             text-align: left;
@@ -12,6 +13,7 @@
     
 </head>
     <body  style="text-align: center;">
+        <button class="button-volver"><a href="ingresar.html" >VOLVER</a></button>
         <div class="page-container">
             <div style="display: flex; align-items: center; margin-right: 50px;">
                 <h1 style="font-size: 58px; text-align: center;"> Nuestro <br> Menú</h1>
@@ -21,7 +23,7 @@
                     <img src="images\entradas.jpg" width="250px" height="350px" >
                     <div class="title-item-menu">
                         <h3>Entradas</h3>
-                        <button class="button"><a href="platos.html">IR</a></button>
+                        <button class="button" id="platos-entradas"><a href="platos.html">IR</a></button>
                     </div>
                 </div>
             </div>
@@ -30,7 +32,7 @@
                     <img src="images\plato fuerte.jpg" width="250px" height="350px" style="object-fit:cover;">
                     <div class="title-item-menu">
                         <h3>Platos Fuertes</h3>
-                        <button class="button"><a href="platos.html">IR</a></button>
+                        <button class="button" id="platos-fuertes"><a href="platos.html">IR</a></button>
                     </div>
                 </div>
             </div>
@@ -39,7 +41,7 @@
                     <img src="images\bebida.jpg" width="250px" height="350px" style="object-fit: cover;" >
                     <div class="title-item-menu">
                         <h3>Postres / Bebidas</h3>
-                        <button class="button"><a href="platos.html">IR</a></button>
+                        <button class="button" id="platos-postres"><a href="platos.html">IR</a></button>
                     </div>
                 </div>
             </div>

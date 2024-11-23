@@ -16,7 +16,7 @@ body {
 }
 
 .page-container{
-    display: flex; flex-direction: row; justify-content: center; margin-top:80px; gap:12%; border: 1px solid red
+    display: flex; flex-direction: row; justify-content: center; margin-top:80px; gap:12%;
 }
 
 .container {
