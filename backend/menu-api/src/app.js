@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 import swaggerJsdoc from "swagger-jsdoc";
 import * as swaggerUi from "swagger-ui-express";
 
@@ -12,6 +13,8 @@ import {PedidoRoutes} from "./routes/PedidoRoute.mjs";
 import { PedidoMenuItemRoutes } from "./routes/PedidoMenuItem.mjs";
 
 const app = express();
+app.use(cors({ origin: 'http://127.0.0.1:5500'
+  }));
 
 const options = {
   definition: {

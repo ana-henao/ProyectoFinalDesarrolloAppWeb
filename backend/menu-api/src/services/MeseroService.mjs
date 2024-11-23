@@ -8,7 +8,7 @@ class MeseroService {
     try {
       console.log("get one mesero");
       const results = await new Db().query(
-        "SELECT * FROM Mesero WHERE id = $1;",
+        "SELECT * FROM Mesero WHERE identificacion = $1;",
         [meseroId]
       );
       if (results.rows.length === 0) {
